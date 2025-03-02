@@ -1,4 +1,4 @@
-# Abdul Rahman Azam  
+
 
 📧 azamabdulrahman930@gmail.com | 📞 +92 316 3677527  
 🌐 [GitHub](https://github.com/abdulrahmanazam) | [LinkedIn](https://linkedin.com/in/abdulrahmanazam) | [LeetCode](https://leetcode.com/abdulrahmanazam)  
@@ -9,10 +9,10 @@
 I am **Abdul Rahman Azam**, an aspiring **AI enthusiast, blockchain developer, and tech entrepreneur**. Passionate about **artificial intelligence, Web3, and metaverse technologies**, I am currently working on cutting-edge projects in AI, Web3 and Blockchain Solutions.  
 
 ### 🚀 **About Me**  
-- 🎓 **Artificial Intelligence Student** at **FAST NUCES Karachi**  
-- 💡 **Founder of Prosbix** – Ai and Web Solutions
-- 🏆 **Competitive Programmer** | 250+ Problems Solved on LeetCode  
-- 🧠 **AI & Blockchain Researcher** | Passionate about **decentralization & smart contracts**  
+- 🎓**Artificial Intelligence Student** at **FAST NUCES Karachi**  
+- 💡**Founder of Prosbix** – Ai and Web Solutions
+- 🏆**Competitive Programmer** | 250+ LeetCode  
+- 🧠**AI & Blockchain** | Researcher
 
 ---
 
