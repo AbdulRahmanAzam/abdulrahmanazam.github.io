@@ -1,0 +1,26 @@
+• University Resource Sharing Platform:                                                                                                                        
+Jan - May 2025 
+o Developed a centralized platform using React.js, Node.js, Express.js, Tailwind CSS, REST APIs for FAST-NUCES students 
+to share resources, join communities, and interact via posts, comments, and file sharing. 
+o Implemented secure email-based authentication, admin moderation, and a scalable PostgreSQL database using 
+Sequelize ORM. 
+• Super Tic Tac Toe (AI-based Web Game)                                                                                                                    
+April - May 2025 
+o Implemented a web-based Super Tic-Tac-Toe game featuring a 9x9 multi-board system and custom scoring model. 
+o Developed an intelligent AI opponent using Minimax with Alpha-Beta Pruning, enabling optimal and efficient decision
+making. 
+• Income Predictor - Data Analysis:                                                                                                                                  
+Sep - Dec 2024 
+o Built a full-stack ML income prediction app using KNN (85% accuracy) with React, TypeScript, FastAPI, and Python on 
+the Adult Census dataset (32,000+ entries) 
+o Automated a complete data analysis and visualization pipeline, generating 50+ visualizations and enabling real-time 
+model insights across 10 KNN variations using Pandas, NumPy, Matplotlib, and Scikit-learn. 
+• 2D Platformer Game:                                                                                                                                                       
+Feb - May 2024 
+o A fast paced action game featuring enemies and reloading weapon systems. Recognized as one of the top 1% projects 
+at university for creativity. 
+o Used Pure C++ with SFML library to reinforce Object-Oriented Programming principles. 
+• AI based Tic-Tac-Toe Game:                                                                                                                                            
+Sep - Dec 2023 
+o Developed a strategic game with 100% win rate against human players using Minimax Algorithm. 
+o Three gameplay modes: 2-Player, random CPU and unbeatable AI. Implemented using Pure C language
