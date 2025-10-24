@@ -1,0 +1,99 @@
+import { useEffect, useRef, useState } from 'react';
+import { portfolioData } from '@shared/schema';
+import { GraduationCap } from 'lucide-react';
+
+export function Education() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section 
+      id="education" 
+      ref={sectionRef}
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-background"
+      data-testid="section-education"
+    >
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-4" data-testid="text-education-header">
+            Education
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Academic background and qualifications
+          </p>
+        </div>
+
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border">
+            <div 
+              className={`h-full bg-primary origin-top transition-transform duration-1500 ${
+                isVisible ? 'scale-y-100' : 'scale-y-0'
+              }`}
+            />
+          </div>
+
+          <div className="space-y-12">
+            {portfolioData.education.map((edu, index) => {
+              const isLeft = index % 2 === 0;
+              
+              return (
+                <div 
+                  key={edu.id}
+                  className={`relative flex items-center ${isLeft ? 'md:flex-row-reverse' : ''}`}
+                  style={{
+                    animation: isVisible ? `fade-in-up 0.6s ease-out ${index * 0.2}s forwards` : 'none',
+                    opacity: isVisible ? 1 : 0,
+                  }}
+                  data-testid={`education-${edu.id}`}
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10" />
+
+                  {/* Content */}
+                  <div className={`ml-12 md:ml-0 ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12'} md:w-1/2`}>
+                    <div className="bg-card border border-card-border rounded-md p-6 hover-elevate">
+                      <div className="flex items-center gap-2 mb-3 md:justify-end">
+                        <GraduationCap className="w-5 h-5 text-primary" />
+                        <span className="font-mono text-sm text-muted-foreground">{edu.period}</span>
+                      </div>
+                      
+                      <h3 className="text-xl font-semibold mb-1" data-testid={`text-institution-${edu.id}`}>
+                        {edu.institution}
+                      </h3>
+                      
+                      <p className="text-base text-muted-foreground mb-2" data-testid={`text-degree-${edu.id}`}>
+                        {edu.degree}
+                      </p>
+                      
+                      <p className="font-mono text-sm font-medium text-primary" data-testid={`text-score-${edu.id}`}>
+                        {edu.score}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
