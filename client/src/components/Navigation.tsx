@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
@@ -77,16 +78,19 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => scrollToSection('resume')}
-              data-testid="button-mobile-menu"
-            >
-              Menu
-            </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => scrollToSection('resume')}
+                data-testid="button-mobile-menu"
+              >
+                Menu
+              </Button>
+            </div>
           </div>
         </div>
       </nav>

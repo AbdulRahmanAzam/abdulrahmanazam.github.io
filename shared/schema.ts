@@ -44,22 +44,21 @@ export const portfolioData = {
   
   skills: {
     web: [
-      { name: "React.js", proficiency: 90 },
-      { name: "Node.js", proficiency: 85 },
-      { name: "Express.js", proficiency: 85 },
-      { name: "TypeScript", proficiency: 88 },
-      { name: "Tailwind CSS", proficiency: 92 },
-      { name: "PostgreSQL", proficiency: 80 },
-      { name: "REST APIs", proficiency: 87 },
+      { name: "React.js" },
+      { name: "Node.js" },
+      { name: "Express.js" },
+      { name: "TypeScript" },
+      { name: "Tailwind CSS" },
+      { name: "PostgreSQL" },
+      { name: "REST APIs" },
     ],
     aiml: [
-      { name: "Python", proficiency: 92 },
-      { name: "Machine Learning", proficiency: 88 },
-      { name: "Deep Learning", proficiency: 85 },
-      { name: "Scikit-learn", proficiency: 87 },
-      { name: "Pandas & NumPy", proficiency: 90 },
-      { name: "Data Visualization", proficiency: 88 },
-      { name: "Algorithm Design", proficiency: 90 },
+      { name: "Python" },
+      { name: "Machine Learning" },
+      { name: "Deep Learning" },
+      { name: "Scikit-learn" },
+      { name: "Pandas & NumPy" },
+      { name: "Data Visualization" },
     ],
   },
   
@@ -183,6 +182,6 @@ export const portfolioData = {
     github: "https://github.com/abdulrahmanazam",
     linkedin: "https://linkedin.com/in/abdulrahmanazam",
     leetcode: "https://leetcode.com/abdulrahmanazam",
-    email: "abdulrahman.azam@example.com",
+    email: "azamabdulrahman930@gmail.com",
   },
 } as const;

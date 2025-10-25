@@ -61,7 +61,7 @@ export function Projects() {
                 data-testid={`project-${project.id}`}
               >
                 <Card 
-                  className={`p-8 hover-elevate active-elevate-2 transition-all duration-700 ${
+                  className={`p-8 hover-elevate active-elevate-2 transition-all duration-300 hover:shadow-blue-400 dark:hover:shadow-green-400 ease-out will-change-transform hover:-translate-y-1 hover:scale-[1.01] hover:shadow-md ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}

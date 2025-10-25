@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Portfolio from "@/pages/Portfolio";
 import NotFound from "@/pages/not-found";
+import { FaviconManager } from "@/components/FaviconManager";
+import { CursorTrail } from "@/components/CursorTrail";
 
 function Router() {
   return (
@@ -19,6 +21,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <FaviconManager />
+        <CursorTrail />
         <Toaster />
         <Router />
       </TooltipProvider>

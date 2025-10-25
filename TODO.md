@@ -1,0 +1,3 @@
+- [x] Replace prior cursor trail implementation with new liquid ribbon effect
+- [x] Run `npm run check`
+- [x] Run `npm run build`

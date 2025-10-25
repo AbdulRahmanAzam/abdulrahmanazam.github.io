@@ -41,22 +41,27 @@ export function NeuralNetworkBackground({ className = '' }: NeuralNetworkBackgro
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
+    // Helper to read current theme color (primary) from CSS variables
+    const readThemeColor = () => {
+      const hsl = getComputedStyle(document.documentElement)
+        .getPropertyValue('--primary')
+        .trim();
+      const [h, s, l] = hsl.split(' ').map((v) => parseFloat(v));
+      return new THREE.Color().setHSL((h || 0) / 360, (s || 0) / 100, (l || 0) / 100);
+    };
+
     // Create neural network nodes
     const nodeCount = 40; // Optimized count
     const nodes: THREE.Mesh[] = [];
-    const nodeGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+    const nodeGeometry = new THREE.SphereGeometry(0.3, 20, 20);
     
-    // Get primary color from CSS variables
-    const primaryColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--primary')
-      .trim();
-    const [h, s, l] = primaryColor.split(' ').map(v => parseFloat(v));
-    const color = new THREE.Color().setHSL(h / 360, s / 100, l / 100);
+    // Get theme-aware color (blue in light, green in dark per --primary)
+    let color = readThemeColor();
 
     const nodeMaterial = new THREE.MeshBasicMaterial({ 
       color: color,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9,
     });
 
     for (let i = 0; i < nodeCount; i++) {
@@ -75,7 +80,7 @@ export function NeuralNetworkBackground({ className = '' }: NeuralNetworkBackgro
     const lineMaterial = new THREE.LineBasicMaterial({ 
       color: color,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.2,
     });
 
     for (let i = 0; i < nodes.length; i++) {
@@ -133,6 +138,15 @@ export function NeuralNetworkBackground({ className = '' }: NeuralNetworkBackgro
 
     animate();
 
+    // Observe theme changes (documentElement class changes)
+    const observer = new MutationObserver(() => {
+      const newColor = readThemeColor();
+      nodeMaterial.color.set(newColor);
+      lineMaterial.color.set(newColor);
+      renderer.render(scene, camera);
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
     // Handle resize
     const handleResize = () => {
       const width = container.clientWidth;
@@ -147,6 +161,7 @@ export function NeuralNetworkBackground({ className = '' }: NeuralNetworkBackgro
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
+      observer.disconnect();
       if (sceneRef.current?.animationId) {
         cancelAnimationFrame(sceneRef.current.animationId);
       }
@@ -165,8 +180,7 @@ export function NeuralNetworkBackground({ className = '' }: NeuralNetworkBackgro
   return (
     <div 
       ref={containerRef} 
-      className={`absolute inset-0 ${className}`}
-      style={{ background: 'transparent' }}
+      className={`absolute inset-0 bg-transparent ${className}`}
     />
   );
 }

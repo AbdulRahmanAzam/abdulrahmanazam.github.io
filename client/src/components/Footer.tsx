@@ -59,8 +59,9 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Abdul Rahman Azam. All rights reserved.</p>
-        </div>
+  <p>© {new Date().getFullYear()} Built with ❤️ by Abdul Rahman Azam. All rights reserved.</p>
+</div>
+
       </div>
     </footer>
   );

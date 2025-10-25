@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .f{fill:hsl(145,63%,42%);}  /* dark mode green */
+    </style>
+  </defs>
+  <!-- Large AR monogram only -->
+  <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Inter, Segoe UI, Roboto, system-ui, Arial, sans-serif"
+      font-size="44" font-weight="900" letter-spacing="-1" class="f">AR</text>
+</svg>

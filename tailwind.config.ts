@@ -112,6 +112,14 @@ export default {
           from: { strokeDashoffset: "1000" },
           to: { strokeDashoffset: "0" },
         },
+        "orbit": {
+          "0%": {
+            transform: "rotate(0deg) translateX(100px) rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg) translateX(100px) rotate(-360deg)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -120,6 +128,11 @@ export default {
         "fade-in": "fade-in 0.4s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "draw-line": "draw-line 1.5s ease-out forwards",
+        "orbit-1": "orbit 20s linear infinite",
+        "orbit-2": "orbit 25s linear infinite",
+        "orbit-3": "orbit 30s linear infinite",
+        "orbit-4": "orbit 35s linear infinite",
+        "orbit-5": "orbit 40s linear infinite",
       },
     },
   },

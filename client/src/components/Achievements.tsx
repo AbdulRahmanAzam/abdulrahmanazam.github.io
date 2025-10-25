@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { portfolioData } from '@shared/schema';
-import { Code2, Trophy, Award, Sparkles } from 'lucide-react';
+import { Code2, Trophy, Award, Sparkles, Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const iconMap = {
   code: Code2,
@@ -11,65 +13,53 @@ const iconMap = {
 };
 
 export function Achievements() {
-  const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
-  const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const [query, setQuery] = useState('');
+  const [visibleCount, setVisibleCount] = useState(8);
 
-  useEffect(() => {
-    const observers = new Map();
-
-    portfolioData.achievements.forEach((achievement) => {
-      const element = cardRefs.current.get(achievement.id);
-      if (element) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setVisibleCards(prev => new Set([...prev, achievement.id]));
-            }
-          },
-          { threshold: 0.2 }
-        );
-        observer.observe(element);
-        observers.set(achievement.id, observer);
-      }
-    });
-
-    return () => {
-      observers.forEach(observer => observer.disconnect());
-    };
-  }, []);
+  const filtered = useMemo(() => {
+    const list = portfolioData.achievements;
+    if (!query.trim()) return list;
+    const q = query.toLowerCase();
+    return list.filter(i => i.title.toLowerCase().includes(q) || i.description.toLowerCase().includes(q));
+  }, [query]);
 
   return (
-    <section 
-      id="achievements" 
+    <section
+      id="achievements"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30"
       data-testid="section-achievements"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-4" data-testid="text-achievements-header">
-            Achievements & Certifications
+        <div className="text-center mb-10">
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-3" data-testid="text-achievements-header">
+            Achievements & Certificates
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Recognition and certifications earned through continuous learning
+            Clean, searchable, and organized list that scales as you add more
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {portfolioData.achievements.map((achievement, index) => {
+        <div className="mb-6 flex items-stretch justify-center">
+          <div className="relative w-full md:max-w-lg">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search by title or description"
+              value={query}
+              onChange={(e) => { setQuery(e.target.value); setVisibleCount(6); }}
+              className="pl-9"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {filtered.slice(0, visibleCount).map((achievement, index) => {
             const Icon = iconMap[achievement.icon as keyof typeof iconMap] || Award;
-            const isVisible = visibleCards.has(achievement.id);
 
             return (
-              <div
-                key={achievement.id}
-                ref={(el) => el && cardRefs.current.set(achievement.id, el)}
-                data-testid={`achievement-${achievement.id}`}
-              >
+              <div key={achievement.id} data-testid={`achievement-${achievement.id}`}>
                 <Card 
-                  className={`p-6 h-full hover-elevate active-elevate-2 transition-all duration-700 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  className="p-6 h-full hover-elevate active-elevate-2 transition-all duration-500 bg-card/80 backdrop-blur-sm rounded-xl border border-card-border"
+                  style={{ transitionDelay: `${index * 60}ms` }}
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-md flex items-center justify-center">
@@ -80,7 +70,7 @@ export function Achievements() {
                       <h3 className="text-xl font-semibold mb-2" data-testid={`text-achievement-title-${achievement.id}`}>
                         {achievement.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed" data-testid={`text-achievement-description-${achievement.id}`}>
+                      <p className="text-muted-foreground leading-relaxed line-clamp-3" data-testid={`text-achievement-description-${achievement.id}`}>
                         {achievement.description}
                       </p>
                     </div>
@@ -90,6 +80,14 @@ export function Achievements() {
             );
           })}
         </div>
+
+        {filtered.length > visibleCount && (
+          <div className="mt-8 flex justify-center">
+            <Button variant="secondary" onClick={() => setVisibleCount((c) => c + 8)}>
+              Load more
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

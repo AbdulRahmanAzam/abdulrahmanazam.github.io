@@ -48,9 +48,7 @@ export function Resume() {
               Download Resume (PDF)
             </Button>
             
-            <p className="text-xs text-muted-foreground mt-4 italic">
-              Note: To add your resume, replace the file at client/public/Abdul_Rahman_Azam_Resume.pdf
-            </p>
+            
           </div>
 
           {/* Contact Links */}
