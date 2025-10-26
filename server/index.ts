@@ -67,14 +67,23 @@ app.use((req, res, next) => {
   }
 
   // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 8000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '8001', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  // Default to 8000 if not specified. If the port is in use, increment until a free port is found.
+  const host = "0.0.0.0" as const;
+  const basePort = parseInt(process.env.PORT || '8000', 10);
+
+  function listenOn(port: number, attemptsLeft = 10) {
+    server.listen({ port, host }, () => {
+      log(`serving on port ${port}`);
+    }).on('error', (err: any) => {
+      if (err && err.code === 'EADDRINUSE' && attemptsLeft > 0) {
+        const nextPort = port + 1;
+        log(`port ${port} in use, retrying on ${nextPort}…`);
+        listenOn(nextPort, attemptsLeft - 1);
+        return;
+      }
+      throw err;
+    });
+  }
+
+  listenOn(basePort);
 })();

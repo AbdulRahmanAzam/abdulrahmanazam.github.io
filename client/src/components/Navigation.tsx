@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
@@ -28,12 +29,12 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const smoothScroll = useSmoothScroll();
+
+  const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+    smoothScroll(element);
+  }, [smoothScroll]);
 
   const navItems = [
     { id: 'home', label: 'Home' },

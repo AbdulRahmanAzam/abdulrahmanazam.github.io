@@ -1,13 +1,14 @@
 import { NeuralNetworkBackground } from './NeuralNetworkBackground';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
+import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 export function Hero() {
+  const smoothScroll = useSmoothScroll();
+
   const scrollToSkills = () => {
     const element = document.getElementById('skills');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    smoothScroll(element);
   };
 
   return (
@@ -40,13 +41,13 @@ export function Hero() {
             className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8"
             data-testid="text-hero-tagline"
           >
-            BS Artificial Intelligence Student | Full-Stack Developer | Problem Solver
+            Crafting Code That Thinks — and Ideas That Build Themselves.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button 
               size="lg"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => smoothScroll(document.getElementById('projects'))}
               data-testid="button-view-projects"
             >
               View Projects
@@ -54,7 +55,7 @@ export function Hero() {
             <Button 
               size="lg"
               variant="outline"
-              onClick={() => document.getElementById('resume')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => smoothScroll(document.getElementById('resume'))}
               data-testid="button-download-resume"
             >
               Download Resume

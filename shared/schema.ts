@@ -40,7 +40,7 @@ export type Achievement = z.infer<typeof achievementSchema>;
 export const portfolioData = {
   name: "Abdul Rahman Azam",
   title: "AI/ML Engineer & Developer",
-  tagline: "BS Artificial Intelligence Student | Full-Stack Developer | Problem Solver",
+  tagline: "Crafting Code That Thinks — and Ideas That Build Themselves.r",
   
   skills: {
     web: [
